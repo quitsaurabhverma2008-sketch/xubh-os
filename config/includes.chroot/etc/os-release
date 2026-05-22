@@ -1,0 +1,13 @@
+PRETTY_NAME="Xubh OS (Kali-based)"
+NAME="Xubh OS"
+ID=xubh
+ID_LIKE=debian
+ANSI_COLOR="1;31"
+HOME_URL="https://xubh-os.org"
+SUPPORT_URL="https://xubh-os.org/support"
+BUG_REPORT_URL="https://xubh-os.org/bugs"
+VERSION_ID="1.0"
+VERSION="1.0 (Ganesha)"
+VERSION_CODENAME=ganesha
+UBUNTU_CODENAME=
+LOGO="xubh-logo"

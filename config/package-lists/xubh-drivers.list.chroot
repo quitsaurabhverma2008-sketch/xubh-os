@@ -1,0 +1,24 @@
+# Xubh OS - Firmware & Drivers
+firmware-linux
+firmware-linux-nonfree
+firmware-misc-nonfree
+firmware-amd-graphics
+firmware-atheros
+firmware-b43-installer
+firmware-b43legacy-installer
+firmware-bnx2
+firmware-bnx2x
+firmware-brcm80211
+firmware-cavium
+firmware-intel-sound
+firmware-iwlwifi
+firmware-libertas
+firmware-netxen
+firmware-qlogic
+firmware-realtek
+firmware-samsung
+firmware-siano
+firmware-ti-connectivity
+firmware-zd1211
+amd64-microcode
+intel-microdata

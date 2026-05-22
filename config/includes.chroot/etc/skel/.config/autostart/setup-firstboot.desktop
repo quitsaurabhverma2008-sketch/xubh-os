@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=First Boot Setup
+Exec=xubh-firstboot
+OnlyShowIn=XFCE;
+NoDisplay=true
+X-XFCE-Autostart-Phase=Desktop

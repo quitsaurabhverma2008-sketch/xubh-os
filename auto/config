@@ -1,0 +1,25 @@
+#!/bin/sh
+# Xubh OS - live-build auto/config
+set -e
+
+lb config noauto \
+    --architecture "${LB_ARCHITECTURE}" \
+    --distribution "${LB_DISTRIBUTION}" \
+    --archive-areas "main contrib non-free non-free-firmware" \
+    --binary-images "iso-hybrid" \
+    --bootappend-live "boot=live components quiet splash username=xubh hostname=xubh" \
+    --debian-installer false \
+    --linux-packages "linux-image linux-headers" \
+    --memtest none \
+    --iso-application "Xubh OS - Penetration Testing Distribution" \
+    --iso-preparer "Xubh OS Team" \
+    --iso-publisher "Xubh OS" \
+    --iso-volume "Xubh OS ${LB_DISTRIBUTION}" \
+    --mode debian \
+    --parent-mirror-bootstrap "http://http.kali.org/kali" \
+    --parent-mirror-binary "http://http.kali.org/kali" \
+    --apt-recommends true \
+    --apt-secure true \
+    --firmware-binary true \
+    --firmware-chroot true \
+    "${@}"

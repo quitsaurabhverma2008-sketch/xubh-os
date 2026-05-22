@@ -1,0 +1,61 @@
+# Xubh OS - Desktop Environment Package List
+# XFCE desktop (lightweight, Kali default)
+xfce4
+xfce4-goodies
+xfce4-terminal
+xfce4-whiskermenu-plugin
+xfce4-notifyd
+xfce4-power-manager
+xfce4-screenshooter
+thunar
+thunar-archive-plugin
+thunar-volman
+tumbler
+
+# Window manager
+lightdm
+lightdm-gtk-greeter
+light-locker
+numlockx
+
+# Themes & icons
+kali-desktop-xfce
+kali-themes-xfce
+papirus-icon-theme
+arc-theme
+gtk2-engines-murrine
+gtk3-nocsd
+
+# System tools
+menulibre
+galculator
+ristretto
+mousepad
+ristretto
+parole
+pavucontrol
+pulseaudio
+pulseaudio-utils
+bluez
+bluez-tools
+blueman
+network-manager-gnome
+xfce4-volumed-pulse
+
+# Fonts
+fonts-crosextra-carlito
+fonts-firacode
+fonts-font-awesome
+fonts-noto
+fonts-noto-cjk
+fonts-noto-color-emoji
+
+# Utilities
+firefox-esr
+thunderbird
+evince
+eom
+file-roller
+gdebi
+synaptic
+gparted

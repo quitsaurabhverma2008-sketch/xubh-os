@@ -1,0 +1,142 @@
+#!/bin/sh
+# Xubh OS - Custom tools and configurations
+set -e
+
+# Create tools directory
+mkdir -p /usr/share/xubh/tools
+mkdir -p /usr/share/xubh/scripts
+mkdir -p /usr/share/xubh/wordlists
+
+# Create a tools overview page
+cat > /usr/share/xubh/tools/README.txt << 'TOOLS'
+XUBH OS - TOOLS OVERVIEW
+=========================
+
+[ Network Scanning ]
+  nmap, masscan, zmap, netcat, tcpdump, wireshark, tshark
+
+[ Web Application ]
+  burpsuite, sqlmap, gobuster, dirb, nikto, whatweb, wpscan, ffuf
+
+[ Exploitation ]
+  metasploit-framework, searchsploit, exploitdb
+
+[ Password Attacks ]
+  hydra, john, hashcat, ophcrack, crunch, cewl, medusa
+
+[ Wireless ]
+  aircrack-ng, reaver, bully, wifite, kismet
+
+[ Forensics ]
+  foremost, testdisk, scalpel, bulk-extractor, binwalk, volatility
+
+[ Sniffing & Spoofing ]
+  mitmproxy, responder, bettercap, ettercap, yersinia
+
+[ Reverse Engineering ]
+  radare2, gdb, strace, ltrace
+
+[ Reporting ]
+  faraday, dradis, cherrytree
+TOOLS
+
+# Install additional tools via pip
+pip3 install --no-input --break-system-packages \
+    bloodhound \
+    impacket \
+    mitm6 \
+    pwn \
+    pwntools \
+    requests \
+    scapy \
+    colorama \
+    paramiko \
+    beautifulsoup4 \
+    2>/dev/null || true
+
+# Install go tools if go is available
+if command -v go &>/dev/null; then
+    export GOPATH=/opt/go
+    mkdir -p $GOPATH
+    go install github.com/ffuf/ffuf/v2@latest 2>/dev/null || true
+    go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest 2>/dev/null || true
+    go install github.com/projectdiscovery/httpx/cmd/httpx@latest 2>/dev/null || true
+    go install github.com/tomnomnom/assetfinder@latest 2>/dev/null || true
+    go install github.com/tomnomnom/httprobe@latest 2>/dev/null || true
+fi
+
+# Download common wordlists
+WORDLISTS_DIR="/usr/share/xubh/wordlists"
+if [ ! -f "${WORDLISTS_DIR}/rockyou.txt" ]; then
+    wget -q -O /tmp/rockyou.txt.gz "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt" 2>/dev/null || true
+    if [ -f /tmp/rockyou.txt.gz ]; then
+        gunzip -c /tmp/rockyou.txt.gz > "${WORDLISTS_DIR}/rockyou.txt" 2>/dev/null || true
+        rm -f /tmp/rockyou.txt.gz
+    fi
+fi
+
+# Create xubh-menu script
+cat > /usr/local/bin/xubh-menu << 'MENU'
+#!/bin/bash
+# Xubh OS tools menu
+echo "╔══════════════════════════════════════╗"
+echo "║        XUBH OS TOOLS MENU            ║"
+echo "╠══════════════════════════════════════╣"
+echo "║ 1) Network Scanning                  ║"
+echo "║ 2) Web Application                   ║"
+echo "║ 3) Exploitation                      ║"
+echo "║ 4) Password Attacks                  ║"
+echo "║ 5) Wireless                          ║"
+echo "║ 6) Forensics                         ║"
+echo "║ 7) Sniffing & Spoofing               ║"
+echo "║ 8) Reverse Engineering               ║"
+echo "║ 9) Update Xubh OS                    ║"
+echo "║ 0) Exit                              ║"
+echo "╚══════════════════════════════════════╝"
+echo -n "Select option: "
+read -r opt
+case $opt in
+    1) echo "Tools: nmap, masscan, wireshark";;
+    2) echo "Tools: burpsuite, sqlmap, gobuster";;
+    3) echo "Tools: msfconsole, searchsploit";;
+    4) echo "Tools: hydra, john, hashcat";;
+    5) echo "Tools: aircrack-ng, wifite, reaver";;
+    6) echo "Tools: foremost, volatility, binwalk";;
+    7) echo "Tools: mitmproxy, responder, bettercap";;
+    8) echo "Tools: radare2, gdb, objdump";;
+    9) sudo apt update && sudo apt upgrade -y;;
+    0) exit 0;;
+    *) echo "Invalid option";;
+esac
+MENU
+chmod +x /usr/local/bin/xubh-menu
+
+# Add user xubh to necessary groups
+if getent passwd xubh >/dev/null 2>&1; then
+    usermod -aG sudo,netdev,wireshark,docker xubh 2>/dev/null || true
+fi
+
+# Set up persistence hint
+mkdir -p /usr/share/xubh
+cat > /usr/share/xubh/persistence.txt << 'PERSIST'
+XUBH OS - PERSISTENCE SETUP
+===========================
+To enable persistence on USB:
+
+1. Create an encrypted persistence partition:
+   sudo fdisk /dev/sdX  # Create a new partition (size as needed)
+   sudo cryptsetup luksFormat /dev/sdXn
+   sudo cryptsetup luksOpen /dev/sdXn xubh-persist
+   sudo mkfs.ext4 -L persistence /dev/mapper/xubh-persist
+
+2. Mount and configure:
+   sudo mount /dev/mapper/xubh-persist /mnt
+   echo "/ union" | sudo tee /mnt/persistence.conf
+   sudo umount /mnt
+
+3. Boot with "persistence" option selected from GRUB.
+PERSIST
+
+# Set proper permissions
+chmod 755 /usr/local/bin/xubh-*
+chmod 755 /usr/share/xubh -R 2>/dev/null || true

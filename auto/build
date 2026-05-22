@@ -1,0 +1,6 @@
+#!/bin/sh
+# Xubh OS - live-build auto/build
+set -e
+
+lb build noauto \
+    "${@}"

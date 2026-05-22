@@ -1,0 +1,36 @@
+# Xubh OS Plymouth boot script
+Wallpaper.SetTiling(false);
+
+fun anim_sprite(bitmap, x, y, width, height, frames) {
+    sprite = Sprite();
+    sprite.SetImage(bitmap);
+    sprite.SetPosition(x, y, width, height);
+    sprite.SetOpacity(1.0);
+    return sprite;
+}
+
+logo = Image("xubh-logo.png");
+logo_sprite = Sprite();
+logo_sprite.SetImage(logo);
+screen_width = Window.GetWidth();
+screen_height = Window.GetHeight();
+logo_sprite.SetPosition(screen_width / 2 - 75, screen_height / 2 - 100, 150, 150);
+logo_sprite.SetOpacity(1.0);
+
+message = Text("Xubh OS");
+message.SetFontName("DejaVu Sans Bold");
+message.SetFontSize(28);
+message.SetColor(1.0, 0.2, 0.2, 1.0);
+msg_x = screen_width / 2 - message.GetWidth() / 2;
+msg_y = screen_height / 2 + 40;
+message.SetPosition(msg_x, msg_y);
+message.SetOpacity(1.0);
+
+subtitle = Text("Penetration Testing Distribution");
+subtitle.SetFontName("DejaVu Sans");
+subtitle.SetFontSize(14);
+subtitle.SetColor(0.6, 0.6, 0.6, 1.0);
+sub_x = screen_width / 2 - subtitle.GetWidth() / 2;
+sub_y = msg_y + 35;
+subtitle.SetPosition(sub_x, sub_y);
+subtitle.SetOpacity(1.0);

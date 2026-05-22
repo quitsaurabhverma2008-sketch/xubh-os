@@ -1,0 +1,109 @@
+#!/bin/sh
+# Xubh OS - Override XFCE default configuration
+set -e
+
+# Create XFCE config directory
+mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/
+mkdir -p /etc/skel/.config/xfce4/panel/
+mkdir -p /etc/skel/.config/Thunar/
+mkdir -p /etc/skel/Desktop/
+
+# XFCE desktop settings - dark theme, Xubh branding
+cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml << 'XFCE'
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xsettings" version="1.0">
+  <property name="Net" type="empty">
+    <property name="ThemeName" type="string" value="Kali-Dark"/>
+    <property name="IconThemeName" type="string" value="Papirus-Dark"/>
+    <property name="DoubleClickTime" type="empty"/>
+    <property name="DoubleClickDistance" type="empty"/>
+    <property name="DndDragThreshold" type="empty"/>
+    <property name="CursorBlink" type="empty"/>
+    <property name="CursorBlinkTime" type="empty"/>
+    <property name="SoundThemeName" type="empty"/>
+    <property name="EnableEventSounds" type="empty"/>
+    <property name="EnableInputFeedbackSounds" type="empty"/>
+  </property>
+</channel>
+XFCE
+
+# Desktop background
+cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml << 'XFCE4'
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="backdrop" type="empty">
+    <property name="screen0" type="empty">
+      <property name="monitor0" type="empty">
+        <property name="image-path" type="string" value="/usr/share/backgrounds/xubh-wallpaper.png"/>
+        <property name="image-style" type="int" value="5"/>
+        <property name="last-image" type="string" value="/usr/share/backgrounds/xubh-wallpaper.png"/>
+      </property>
+      <property name="monitor1" type="empty">
+        <property name="image-path" type="string" value="/usr/share/backgrounds/xubh-wallpaper.png"/>
+        <property name="image-style" type="int" value="5"/>
+        <property name="last-image" type="string" value="/usr/share/backgrounds/xubh-wallpaper.png"/>
+      </property>
+    </property>
+  </property>
+</channel>
+XFCE4
+
+# Panel configuration
+cat > /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml << 'PANEL'
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-panel" version="1.0">
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <value type="int" value="2"/>
+  </property>
+  <property name="panel-1" type="empty">
+    <property name="position" type="string" value="p=6;x=0;y=0"/>
+    <property name="length" type="uint" value="100"/>
+    <property name="position-locked" type="bool" value="true"/>
+    <property name="size" type="uint" value="30"/>
+    <property name="autohide-behavior" type="uint" value="0"/>
+  </property>
+  <property name="panel-2" type="empty">
+    <property name="position" type="string" value="p=10;x=0;y=0"/>
+    <property name="length" type="uint" value="100"/>
+    <property name="position-locked" type="bool" value="true"/>
+    <property name="size" type="uint" value="26"/>
+    <property name="autohide-behavior" type="uint" value="0"/>
+  </property>
+</channel>
+PANEL
+
+# Terminal config - dark with red accent
+mkdir -p /etc/skel/.config/xfce4/terminal/
+cat > /etc/skel/.config/xfce4/terminal/terminalrc << 'TERM'
+[Configuration]
+FontName=Fira Code 11
+ColorForeground=#dddddd
+ColorBackground=#111111
+ColorPalette=#000000;#cc3333;#33cc33;#cccc33;#3333cc;#cc33cc;#33cccc;#cccccc;#555555;#ff4444;#44ff44;#ffff44;#4444ff;#ff44ff;#44ffff;#ffffff
+TabActivityColor=#cc3333
+TERM
+
+# LightDM GTK greeter
+mkdir -p /etc/lightdm/
+cat > /etc/lightdm/lightdm-gtk-greeter.conf << 'LIGHTDM'
+[greeter]
+background = /usr/share/backgrounds/xubh-wallpaper.png
+theme-name = Kali-Dark
+icon-theme-name = Papirus-Dark
+font-name = DejaVu Sans 11
+user-background = false
+indicators = ~host;~spacer;~clock;~spacer;~power
+LIGHTDM
+
+# Set Xubh welcome to run on first login
+mkdir -p /etc/skel/.config/autostart/
+cat > /etc/skel/.config/autostart/xubh-welcome.desktop << 'WELCOME'
+[Desktop Entry]
+Type=Application
+Name=Xubh Welcome
+Exec=xubh-welcome
+OnlyShowIn=XFCE;
+NoDisplay=false
+X-XFCE-Autostart-Phase=Desktop
+WELCOME

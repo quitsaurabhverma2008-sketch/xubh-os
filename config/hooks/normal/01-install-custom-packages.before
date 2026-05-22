@@ -1,0 +1,15 @@
+#!/bin/sh
+# Xubh OS - Additional package installation in chroot
+# This runs before the package lists are processed
+set -e
+
+# Add Kali repository for pentesting tools
+cat > /etc/apt/sources.list.d/kali.list << 'KALI'
+deb http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware
+KALI
+
+# Add Kali archive key
+wget -q -O- https://archive.kali.org/archive-key.asc | apt-key add - 2>/dev/null || true
+
+# Update package lists
+apt-get update -qq 2>/dev/null || true

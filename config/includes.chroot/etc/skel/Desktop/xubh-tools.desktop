@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Link
+Name=Xubh Tools
+Comment=Browse Xubh OS pentesting tools
+Icon=applications-other
+URL=file:///usr/share/xubh/tools
+Categories=System;

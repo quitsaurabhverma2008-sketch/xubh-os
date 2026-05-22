@@ -1,0 +1,22 @@
+# Xubh OS - Git Ignore
+/build.log
+/output/
+/.build/
+*.iso
+*.hybrid.iso
+*.img
+config/binary/
+config/bootstrap/
+config/build/
+config/chroot/
+config/common/
+config/source/
+config/hooks/normal/*.chroot
+config/includes.chroot/usr/share/plymouth/themes/xubh/*.png
+config/includes.chroot/usr/share/backgrounds/*.png
+config/includes.chroot/usr/share/grub/themes/xubh/*.png
+config/includes.binary/isolinux/*.png
+*.swp
+*~
+.DS_Store
+Thumbs.db

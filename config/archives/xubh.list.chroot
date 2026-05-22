@@ -1,0 +1,3 @@
+# Xubh OS custom repository
+# If you host custom packages, add your repo here
+# deb http://repo.xubh-os.org/xubh stable main
