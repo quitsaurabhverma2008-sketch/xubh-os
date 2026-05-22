@@ -1,0 +1,7 @@
+[Plymouth Theme]
+Name=Xubh OS
+Description=Xubh OS Boot Splash
+ModuleName=script
+[script]
+ImageDir=/usr/share/plymouth/themes/xubh
+ScriptFile=/usr/share/plymouth/themes/xubh/xubh.script

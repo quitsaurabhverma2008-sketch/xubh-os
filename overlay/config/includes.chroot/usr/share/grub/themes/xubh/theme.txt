@@ -1,0 +1,30 @@
+title-text: "XUBH OS"
+title-font: "DejaVu Sans Bold 18"
+title-color: "#FF3333"
+title-align: "center"
+desktop-image: "background.png"
+desktop-color: "#1a1a1a"
+terminal-font: "DejaVu Sans 12"
++ boot_menu {
+    left = 25%
+    top = 20%
+    width = 50%
+    height = 60%
+    align = "center"
+    item_color = "#cccccc"
+    selected_item_color = "#FF3333"
+    item_height = 32
+    item_padding = 8
+    item_spacing = 4
+    item_font = "DejaVu Sans 14"
+    selected_item_font = "DejaVu Sans Bold 14"
+    scrollbar = true
+}
++ progress_bar {
+    top = 90%
+    left = 20%
+    width = 60%
+    height = 12
+    bar_color = "#FF3333"
+    bar_bg_color = "#333333"
+}

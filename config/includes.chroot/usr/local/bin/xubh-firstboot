@@ -1,5 +1,5 @@
 #!/bin/bash
-# Xubh OS - First boot setup script
+# Xubh OS first boot setup
 FIRST_BOOT_FLAG="/var/lib/xubh/firstboot-done"
 
 if [ -f "$FIRST_BOOT_FLAG" ]; then
@@ -8,32 +8,15 @@ fi
 
 mkdir -p /var/lib/xubh
 
-# Generate SSH host keys if not present
+# Regenerate SSH host keys
 if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
     dpkg-reconfigure openssh-server 2>/dev/null || true
 fi
 
-# Enable useful services
+# Enable services
 systemctl enable fail2ban 2>/dev/null || true
-systemctl enable ufw 2>/dev/null || true
 
-# Set default firewall rules
-ufw default deny incoming 2>/dev/null || true
-ufw default allow outgoing 2>/dev/null || true
-
-# Enable Docker if installed
-systemctl enable docker 2>/dev/null || true
-
-# Set up aliases missing from .bashrc
-for home_dir in /home/* /root; do
-    if [ -d "$home_dir" ] && [ ! -f "$home_dir/.hushlogin" ]; then
-        touch "$home_dir/.hushlogin"
-    fi
-done
-
-# Set default shell to zsh if installed
-if command -v zsh &>/dev/null; then
-    chsh -s /bin/zsh xubh 2>/dev/null || true
-fi
+# Set plymouth theme
+plymouth-set-default-theme xubh 2>/dev/null || true
 
 touch "$FIRST_BOOT_FLAG"

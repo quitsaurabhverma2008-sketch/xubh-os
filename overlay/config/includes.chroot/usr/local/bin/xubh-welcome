@@ -1,5 +1,4 @@
 #!/bin/bash
-# Xubh OS welcome screen
 RED='\033[0;31m'
 NC='\033[0m'
 BOLD='\033[1m'
@@ -12,8 +11,6 @@ echo ""
 neofetch --stdout 2>/dev/null || neofetch 2>/dev/null || true
 echo ""
 echo -e "  ${RED}Quick commands:${NC}"
-echo -e "    ${RED}xubh-update${NC}   - Update system (apt update + full-upgrade)"
-echo -e "    ${RED}xubh-menu${NC}    - Browse installed tools"
-echo ""
-echo -e "  ${RED}All Kali commands and tools work exactly as in Kali Linux.${NC}"
+echo -e "    xubh-update  - Update system"
+echo -e "    xubh-menu    - Browse tools"
 echo ""

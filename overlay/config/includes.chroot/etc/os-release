@@ -1,0 +1,12 @@
+PRETTY_NAME="Xubh OS"
+NAME="Xubh OS"
+ID=xubh
+ID_LIKE=debian
+ANSI_COLOR="1;31"
+HOME_URL="https://xubh-os.org"
+SUPPORT_URL="https://xubh-os.org/support"
+BUG_REPORT_URL="https://xubh-os.org/bugs"
+VERSION_ID="1.0"
+VERSION="1.0"
+VERSION_CODENAME=ganesha
+LOGO="xubh-logo"

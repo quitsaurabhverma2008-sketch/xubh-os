@@ -1,4 +1,3 @@
-# Xubh OS - Git Ignore
 /build.log
 /output/
 /.build/
@@ -12,11 +11,9 @@ config/chroot/
 config/common/
 config/source/
 config/hooks/normal/*.chroot
-config/includes.chroot/usr/share/plymouth/themes/xubh/*.png
-config/includes.chroot/usr/share/backgrounds/*.png
-config/includes.chroot/usr/share/grub/themes/xubh/*.png
-config/includes.binary/isolinux/*.png
-*.swp
+# Generated PNG assets
+*.png
+!assets/*.svg
 *~
 .DS_Store
 Thumbs.db
