@@ -241,14 +241,18 @@ build_iso() {
     cd "${XB_BUILD_DIR}/.build/live-build-config"
 
     log "Running lb build (this will take 1-2 hours)..."
-    sudo ./build.sh --distribution "${XB_DIST}" --architecture "${XB_ARCH}" 2>&1 | tee -a "${XB_LOG_FILE}"
+    sudo ./build.sh --distribution "${XB_DIST}" --arch "${XB_ARCH}" 2>&1 | tee -a "${XB_LOG_FILE}"
 
     if ls kali-linux-*.iso 1>/dev/null 2>&1; then
-        mv kali-linux-*.iso "${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
+        for f in kali-linux-*.iso; do
+            mv "$f" "${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
+        done
         log "SUCCESS: ISO built at ${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
         ls -lh "${XB_OUTPUT_DIR}/"
     elif ls live-image-*.hybrid.iso 1>/dev/null 2>&1; then
-        mv live-image-*.hybrid.iso "${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
+        for f in live-image-*.hybrid.iso; do
+            mv "$f" "${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
+        done
         log "SUCCESS: ISO built at ${XB_OUTPUT_DIR}/xubh-os-${XB_DIST}-${XB_ARCH}.iso"
         ls -lh "${XB_OUTPUT_DIR}/"
     else
